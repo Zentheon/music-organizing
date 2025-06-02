@@ -6,7 +6,7 @@
 
 A naming script for Picard that makes extensive use of MusicBrainz IDs. Requires the "Additional Artist Variables" plugin to be installed `(Options > Options... > Plugins)`
 
-Filenames which are too long get automatically truncated with fairly conservative defaults (~260). If you wish to raise (or lower) the limits then simply adjust the values after the `$len` functions accordingly.
+Filenames which are too long get automatically truncated with fairly conservative defaults (~260 characters). If you wish to raise (or lower) the limits then simply adjust the values after the `$len` functions accordingly.
 
 [Direct link](https://github.com/Zentheon/music-organizing/blob/main/Naming-with-MBIDs.ptsp)
 

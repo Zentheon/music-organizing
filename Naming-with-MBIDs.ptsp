@@ -1,0 +1,19 @@
+title: '[album artist 1] [id] [album artist 2] [id].../[album] [id]/[track num] [track title] [id]'
+description: |
+  Takes advantage of MBIDs to create a sane directory structure. Requires "Additional Artist Variables" plugin.
+author: 'Zentheon'
+license: 'MIT'
+version: '1'
+last_updated: 2025-06-01 10:09:27 UTC
+script_language_version: '1.1'
+script: |
+  $set(primary_artist,%_artists_album_primary_std% [$left(%_artists_album_primary_id%,8)])
+
+  $foreach(%_artists_album_additional_id%,$set(additional_artists,%additional_artists% $getmulti(%_artists_album_additional_std_multi%,$sub(%_loop_count%,1)) [$left($getmulti(%_artists_album_additional_id%,$sub(%_loop_count%,1)),8)]))
+  $if($gt($len(%primary_artist%%additional_artists%),258),%primary_artist% Various Artists [truncated],%primary_artist%%additional_artists%)
+  /
+  $if($gt($len(%album%),240),%album%,%album% [$left(%musicbrainz_albumid%,8)])
+  /
+  $if($gt(%totaldiscs%,1),$if($gt(%totaldiscs%,9),$num(%discnumber%,2),%discnumber%)-,)$if($and(%albumartist%,%tracknumber%),$num(%tracknumber%,2) ,)
+  $if($gt($len(%title%),240),%title%,%title% [$left(%musicbrainz_trackid%,8)])
+id: d0ca09ef-7c33-4382-930e-64dc0cd2ff46
